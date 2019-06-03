@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class ClientController {
     @Autowired
@@ -18,7 +19,7 @@ public class ClientController {
     }
     @GetMapping("/clients/{id}")
     public Client getOne(@PathVariable Long id){
-        return repository.getOne(id);
+        return repository.findById(id).get();
     }
     @PostMapping("/clients")
     public void newOne(@RequestBody Client c){

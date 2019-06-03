@@ -15,5 +15,5 @@ public interface CompteRepository extends JpaRepository<Compte,Double> {
     @RestResource(path = "/active")
     public List<Compte> findByEtatIsTrue();
     @RestResource(path = "/parclient")
-    public List<Compte> findByClient(Long id);
+    public List<Compte> findByClientEquals(Long id);
 }
