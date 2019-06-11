@@ -7,8 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class TransactionLinker {
 
-    //String hostTransactions="http://mstransactions:8080";
-    String hostTransactions="http://localhost:8080";
+    String hostTransactions="http://mstransactions:8080";
     RestTemplate restTemplate = new RestTemplate();
 
     public Object get(String url){
