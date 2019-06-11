@@ -22,4 +22,13 @@ public class Compte implements Serializable {
     private boolean etat=false;
     private Double Sold= (double) 0;
     private Date dateCreation;
+    public Double crediter(Double montant){
+        this.Sold+=montant;
+        return this.getSold();
+
+    }
+    public Double debiter(Double montant){
+        return crediter(-montant);
+    }
+
 }

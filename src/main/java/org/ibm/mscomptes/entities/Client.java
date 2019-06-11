@@ -19,7 +19,6 @@ public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    @Column(unique = true)
     protected String CIN;
     protected String nom;
     protected String prenom;
@@ -32,5 +31,6 @@ public class Client implements Serializable {
     protected String tel;
     protected String fix;
     protected String paye;
+    protected String ville;
     protected String address;
 }
