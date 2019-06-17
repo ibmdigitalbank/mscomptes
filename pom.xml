@@ -71,7 +71,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>mscomptes-app</finalName>
+        <finalName>mscomptes</finalName>
     </build>
 
 </project>
