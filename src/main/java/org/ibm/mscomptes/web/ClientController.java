@@ -25,7 +25,7 @@ public class ClientController {
     public void newOne(@RequestBody Client c){
         repository.save(c);
     }
-    @PatchMapping("/clients")
+    @PutMapping("/clients")
     public void saveCompte(@PathVariable Double rib,@RequestBody Client c){
         repository.save(c);
     }

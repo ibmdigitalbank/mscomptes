@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @CrossOrigin("*")
 @RestController
@@ -28,21 +29,25 @@ public class transactionsController {
     }
     @PostMapping("/transaction")
     @Transactional
-    public Transaction newOne(@RequestBody Transaction t){
-
+    public Transaction newline(@RequestBody Transaction t){
+        System.out.println("------------- new Transaction -------------");
+        t.setDate(new Date());
         Compte source=compteRepository.findById(t.getSource()).get();
         Compte destination=compteRepository.findById(t.getDestination()).get();
         source.debiter(t.getMontant());
         destination.crediter(t.getMontant());
         compteRepository.save(source);
         compteRepository.save(destination);
-
-        System.out.println(String.format("--------------%s\nmotif : %s\nmontant : %d",t.getDate().toString(),t.getMotif(),t.getMontant()));
-        String format="compte :%s\ttype :%s";
-        System.out.println(String.format(format,source.getRIB().toString(),"OUT"));
-        System.out.println(String.format(format,destination.getRIB().toString(),"OUT"));
-
-        return linker.create(t);
+        System.out.println("source : "+source.toString());
+        System.out.println("destination : "+destination.toString());
+        System.out.println("montant : "+t.getMontant());
+        System.out.println("date : "+t.getDate().toString());
+        System.out.println("motif : "+ t.getMotif());
+        Transaction ret=linker.create(t);
+        System.out.print("RESULT : ");
+        if(ret!=null) System.out.print(ret.toString());
+        else System.out.print("FAILED");
+        return ret;
     }
 
 

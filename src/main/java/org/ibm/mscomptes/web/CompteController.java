@@ -39,10 +39,11 @@ public class CompteController {
     public void newOne(@RequestBody Compte c){
         compteRepository.save(c);
     }
-    @PatchMapping("/compte")
+    @PutMapping("/compte")
     public void saveCompte(@PathVariable Double rib,@RequestBody Compte c){
         compteRepository.save(c);
     }
+    
 
 
 

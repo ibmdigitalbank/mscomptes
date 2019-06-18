@@ -7,13 +7,15 @@ import org.springframework.web.client.RestTemplate;
 
 public class TransactionLinker {
 
-    String hostTransactions="http://mstransactions:8080";
+    String hostTransactions="http://localhost:8080";
     RestTemplate restTemplate = new RestTemplate();
 
     public Object get(String url){
-        return restTemplate.getForObject(hostTransactions+url, String.class);
+        System.out.println("> GET REQUEST TO '"+hostTransactions+url+"'");
+    return restTemplate.getForObject(hostTransactions+url, String.class);
     }
     public Transaction post(String url, Transaction t){
+        System.out.println("> POST REQUEST TO '"+hostTransactions+url+"' with data : "+t.toString());
         HttpEntity<Transaction> request = new HttpEntity<>(t);
         return restTemplate.postForObject(hostTransactions+ url, request,Transaction.class);
     }
