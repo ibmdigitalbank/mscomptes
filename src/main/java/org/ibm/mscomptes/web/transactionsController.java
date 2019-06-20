@@ -1,5 +1,7 @@
 package org.ibm.mscomptes.web;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.ibm.mscomptes.dao.CompteRepository;
 import org.ibm.mscomptes.dao.TransactionLinker;
 import org.ibm.mscomptes.entities.Compte;
@@ -12,6 +14,7 @@ import java.util.Date;
 
 @CrossOrigin("*")
 @RestController
+@Api(value="Transactions Controller", description="Transactions microservices linker")
 public class transactionsController {
     private TransactionLinker linker=new TransactionLinker();
     @Autowired
@@ -19,18 +22,20 @@ public class transactionsController {
 
     
     @GetMapping("/transactions/{rib}")
+    @ApiOperation(value = "list of transactions of an account")
     public Object getTransactionsByCompte(@PathVariable Long rib){
         return linker.getTransactionsByCompte(rib);
     }
 
     @GetMapping("/sold/{rib}")
+    @ApiOperation(value = "calculate sold of an account")
     public Double getSoldByCompte(@PathVariable Long rib){
         return linker.getSoldByCompte(rib);
     }
     @PostMapping("/transaction")
+    @ApiOperation(value = "create a new transaction")
     @Transactional
     public Transaction newline(@RequestBody Transaction t){
-        System.out.println("------------- new Transaction -------------");
         t.setDate(new Date());
         Compte source=compteRepository.findById(t.getSource()).get();
         Compte destination=compteRepository.findById(t.getDestination()).get();
@@ -38,15 +43,7 @@ public class transactionsController {
         destination.crediter(t.getMontant());
         compteRepository.save(source);
         compteRepository.save(destination);
-        System.out.println("source : "+source.toString());
-        System.out.println("destination : "+destination.toString());
-        System.out.println("montant : "+t.getMontant());
-        System.out.println("date : "+t.getDate().toString());
-        System.out.println("motif : "+ t.getMotif());
         Transaction ret=linker.create(t);
-        System.out.print("RESULT : ");
-        if(ret!=null) System.out.print(ret.toString());
-        else System.out.print("FAILED");
         return ret;
     }
 
