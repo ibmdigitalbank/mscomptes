@@ -83,7 +83,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>mscomptes</finalName>
+        <finalName>app</finalName>
     </build>
 
 </project>
